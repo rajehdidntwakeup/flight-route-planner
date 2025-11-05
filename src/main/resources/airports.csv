@@ -1,0 +1,16 @@
+id,iata,city,country,latitude,longitude
+1,VIE,Vienna,Austria,48.1103,16.5697
+2,FRA,Frankfurt,Germany,50.0379,8.5622
+3,JFK,New York,USA,40.6413,-73.7781
+4,LHR,London,UK,51.4700,-0.4543
+5,CDG,Paris,France,49.0097,2.5479
+6,AMS,Amsterdam,Netherlands,52.3105,4.7683
+7,MAD,Madrid,Spain,40.4839,-3.5680
+8,FCO,Rome,Italy,41.8003,12.2389
+9,MUC,Munich,Germany,48.3537,11.7750
+10,ZRH,Zurich,Switzerland,47.4582,8.5556
+11,BRU,Brussels,Belgium,50.9010,4.4856
+12,DUB,Dublin,Ireland,53.4213,-6.2701
+13,CPH,Copenhagen,Denmark,55.6180,12.6508
+14,STO,Stockholm,Sweden,59.6519,17.9186
+15,OSL,Oslo,Norway,60.1939,11.1004

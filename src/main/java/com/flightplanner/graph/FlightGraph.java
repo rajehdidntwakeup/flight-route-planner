@@ -6,12 +6,14 @@ import com.flightplanner.model.Flight;
 import java.util.*;
 
 /**
- * Represents a graph of airports and flights using an adjacency list.
- * Each airport (node) maps to a list of outgoing flights (edges).
+ * Models a graph representing flights between airports, where airports are nodes
+ * and flights are directed edges. The graph supports operations for adding airports
+ * and flights, retrieving flights from specific airports, and querying airports by
+ * their IATA codes.
  */
 public class FlightGraph {
     // Adjacency list: Airport -> List of outgoing flights
-    private final Map<Airport, List<Flight>> adjacencyList;
+    private final Map<Airport, List<Flight>> airportFlightsMap;
     
     // Quick lookup maps
     private final Map<String, Airport> airportsByIata;
@@ -20,7 +22,7 @@ public class FlightGraph {
      * Constructs an empty FlightGraph.
      */
     public FlightGraph() {
-        this.adjacencyList = new HashMap<>();
+        this.airportFlightsMap = new HashMap<>();
         this.airportsByIata = new HashMap<>();
     }
 
@@ -30,7 +32,7 @@ public class FlightGraph {
      * @param airport The airport to add
      */
     public void addAirport(Airport airport) {
-        adjacencyList.putIfAbsent(airport, new ArrayList<>());
+        airportFlightsMap.putIfAbsent(airport, new ArrayList<>());
         airportsByIata.put(airport.getIata(), airport);
     }
 
@@ -47,7 +49,7 @@ public class FlightGraph {
         }
         
         addAirport(originAirport);
-        adjacencyList.get(originAirport).add(flight);
+        airportFlightsMap.get(originAirport).add(flight);
     }
 
     /**
@@ -57,7 +59,7 @@ public class FlightGraph {
      * @return List of flights departing from the airport, or empty list if none
      */
     public List<Flight> getFlightsFrom(Airport airport) {
-        return adjacencyList.getOrDefault(airport, new ArrayList<>());
+        return airportFlightsMap.getOrDefault(airport, new ArrayList<>());
     }
 
     /**
@@ -92,7 +94,7 @@ public class FlightGraph {
      */
     public List<Flight> getAllFlights() {
         List<Flight> allFlights = new ArrayList<>();
-        for (List<Flight> flights : adjacencyList.values()) {
+        for (List<Flight> flights : airportFlightsMap.values()) {
             allFlights.addAll(flights);
         }
         return allFlights;
@@ -104,7 +106,7 @@ public class FlightGraph {
      * @return Number of airports
      */
     public int getAirportCount() {
-        return adjacencyList.size();
+        return airportFlightsMap.size();
     }
 
     /**

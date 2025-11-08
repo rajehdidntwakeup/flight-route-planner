@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 public class FlightPlannerApp {
     private final Scanner scanner;
     private final DataLoader dataLoader;
-    private FlightGraph graph;
     private RouteFinder routeFinder;
     private FlightSearch flightSearch;
 
@@ -156,8 +155,8 @@ public class FlightPlannerApp {
 
         try {
             dataLoader.readFlightsFromCSV(filename);
-            graph = dataLoader.buildGraph();
-            routeFinder = new RouteFinder(graph, dataLoader.getFlights());
+          FlightGraph graph = dataLoader.buildGraph();
+            routeFinder = new RouteFinder(graph);
             flightSearch = new FlightSearch(new ArrayList<>(dataLoader.getFlights().values()), 
                                            dataLoader.getAirports());
             System.out.println("✓ Flights loaded successfully.");
@@ -356,10 +355,10 @@ public class FlightPlannerApp {
     }
 
     /**
-     * Gets string input from user.
+     * Gets string input from the user.
      */
-    private String getStringInput(String prompt) {
-        System.out.print(prompt);
+    private String getStringInput(String input) {
+        System.out.print(input);
         return scanner.nextLine().trim();
     }
 }

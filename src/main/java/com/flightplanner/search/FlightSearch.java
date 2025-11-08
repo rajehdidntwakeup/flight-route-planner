@@ -162,7 +162,6 @@ public class FlightSearch {
                     sb.append(String.format("%d. %s\n", i + 1, flights.get(i).toString()));
                 }
             }
-            
             return sb.toString();
         }
     }

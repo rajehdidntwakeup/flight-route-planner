@@ -84,14 +84,6 @@ public class FlightGraph {
         return airportsByIata.get(iata);
     }
 
-    /**
-     * Gets all airports in the graph.
-     *
-     * @return Set of all airports
-     */
-    public Set<Airport> getAllAirports() {
-        return adjacencyList.keySet();
-    }
 
     /**
      * Gets all flights in the graph.
@@ -104,16 +96,6 @@ public class FlightGraph {
             allFlights.addAll(flights);
         }
         return allFlights;
-    }
-
-    /**
-     * Checks if an airport exists in the graph.
-     *
-     * @param iata The IATA code to check
-     * @return true if the airport exists, false otherwise
-     */
-    public boolean hasAirport(String iata) {
-        return airportsByIata.containsKey(iata);
     }
 
     /**

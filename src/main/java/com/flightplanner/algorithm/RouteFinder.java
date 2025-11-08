@@ -17,9 +17,8 @@ import java.util.*;
  */
 public class RouteFinder {
     private final FlightGraph graph;
-    private final Map<Integer, Flight> flightMap;
 
-    // Route finding criteria
+  // Route finding criteria
     public static final int CRITERION_CHEAPEST = 1;
     public static final int CRITERION_FASTEST = 2;
     public static final int CRITERION_FEWEST_STOPOVERS = 3;
@@ -32,11 +31,9 @@ public class RouteFinder {
      * Constructs a RouteFinder with the given graph and flight map.
      *
      * @param graph     The flight graph
-     * @param flightMap Map of flight IDs to Flight objects
      */
-    public RouteFinder(FlightGraph graph, Map<Integer, Flight> flightMap) {
+    public RouteFinder(FlightGraph graph) {
         this.graph = graph;
-        this.flightMap = flightMap;
     }
 
     /**
@@ -76,7 +73,7 @@ public class RouteFinder {
      * @return The cheapest Route, or null if no route exists
      */
     private Route findCheapestRoute(Airport origin, Airport destination) {
-        return dijkstra(origin, destination, (flight) -> flight.getPrice());
+        return dijkstra(origin, destination, Flight::getPrice);
     }
 
     /**
@@ -175,7 +172,7 @@ public class RouteFinder {
             }
         }
 
-        // Unmark current airport
+        // Unmark the current airport
         visited.remove(currentIata);
     }
 

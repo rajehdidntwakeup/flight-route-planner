@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
  */
 public class DataLoader {
     private final Map<String, Airport> airports;
-    private Map<Integer, Flight> flights;
-    private Map<Integer, Route> routes;
-    private FlightGraph graph;
+    private final Map<Integer, Flight> flights;
+    private final Map<Integer, Route> routes;
+    private final FlightGraph graph;
 
     public DataLoader() {
         this.airports = new HashMap<>();
@@ -31,11 +31,10 @@ public class DataLoader {
      * Reads airports from a CSV file.
      * Expected format: id,iata,city,country,latitude,longitude
      *
-     * @param filename Name of the CSV file in resources directory
-     * @return Map of IATA code to Airport
+     * @param filename Name of the CSV file in the resources directory
      * @throws IOException If file reading fails
      */
-    public Map<String, Airport> readAirportsFromCSV(String filename) throws IOException {
+    public void readAirportsFromCSV(String filename) throws IOException {
         airports.clear();
         
         try (BufferedReader br = getResourceReader(filename)) {
@@ -70,18 +69,16 @@ public class DataLoader {
         }
         
         System.out.println("Loaded " + airports.size() + " airports from " + filename);
-        return airports;
     }
 
     /**
      * Reads flights from a CSV file.
-     * Expected format: id,origin,destination,airline,flightNumber,duration,price,departureTime
+     * Expected format: id, origin, destination, airline, flightNumber, duration, price, departureTime
      *
-     * @param filename Name of the CSV file in resources directory
-     * @return List of Flight objects
+     * @param filename Name of the CSV file in the resources directory
      * @throws IOException If file reading fails
      */
-    public List<Flight> readFlightsFromCSV(String filename) throws IOException {
+    public void readFlightsFromCSV(String filename) throws IOException {
         flights.clear();
         List<Flight> flightList = new ArrayList<>();
         
@@ -133,18 +130,16 @@ public class DataLoader {
         }
         
         System.out.println("Loaded " + flightList.size() + " flights from " + filename);
-        return flightList;
     }
 
     /**
      * Reads routes from a CSV file.
      * Expected format: id,flightIds (separated by hyphens, e.g., "1-47-18")
      *
-     * @param filename Name of the CSV file in resources directory
-     * @return List of Route objects
+     * @param filename Name of the CSV file in the resources directory
      * @throws IOException If file reading fails
      */
-    public List<Route> readRoutesFromCSV(String filename) throws IOException {
+    public void readRoutesFromCSV(String filename) throws IOException {
         routes.clear();
         List<Route> routeList = new ArrayList<>();
         
@@ -193,14 +188,13 @@ public class DataLoader {
         }
         
         System.out.println("Loaded " + routeList.size() + " routes from " + filename);
-        return routeList;
     }
 
     /**
      * Saves routes to a CSV file.
      * Format: id,flightIds (separated by hyphens)
      *
-     * @param filename Name of the CSV file in resources directory
+     * @param filename Name of the CSV file in the resources directory
      * @param routes   List of routes to save
      * @throws IOException If file writing fails
      */
@@ -239,13 +233,13 @@ public class DataLoader {
      *
      * @param filename Name of the resource file
      * @return BufferedReader for the file
-     * @throws IOException If file is not found
+     * @throws IOException If the file is not found
      */
     private BufferedReader getResourceReader(String filename) throws IOException {
-        // Try to read from resources directory
+        // Try to read from the resources directory
         InputStream is = getClass().getClassLoader().getResourceAsStream(filename);
         
-        // If not found in classpath, try reading from src/main/resources/
+        // If not found in the classpath, try reading from src/main/resources/
         if (is == null) {
             String resourcePath = "src/main/resources/" + filename;
             File file = new File(resourcePath);
@@ -259,7 +253,6 @@ public class DataLoader {
         return new BufferedReader(new InputStreamReader(is));
     }
 
-    // Getters
     public Map<String, Airport> getAirports() {
         return airports;
     }
@@ -272,7 +265,4 @@ public class DataLoader {
         return routes;
     }
 
-    public FlightGraph getGraph() {
-        return graph;
-    }
 }

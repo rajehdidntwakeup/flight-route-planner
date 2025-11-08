@@ -117,6 +117,15 @@ public class FlightPlannerApp {
       System.out.println("No route found between " + origin + " and " + destination);
     } else {
       System.out.println("\n" + result.toDetailedString(getFlightsForRoute(result)));
+      System.out.println("Do you want to save this route? (y/n): ");
+      String saveChoice = scanner.nextLine().trim().toLowerCase();
+      if (saveChoice.equals("y")) {
+        Set<Integer> routeIdSet = dataLoader.getRoutes().keySet();
+        int routeId = routeIdSet.stream().mapToInt(Integer::intValue).max().orElse(1) + 1;
+        result.setId(routeId);
+        dataLoader.getRoutes().put(routeId, result);
+        System.out.println("✓ Route saved with ID: " + result.getId());
+      }
     }
   }
 

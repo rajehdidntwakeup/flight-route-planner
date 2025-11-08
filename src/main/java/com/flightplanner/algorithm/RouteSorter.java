@@ -13,7 +13,7 @@ import java.util.List;
 public class RouteSorter {
 
   /**
-   * Stable sort using Merge Sort algorithm.
+   * Stable sort using the Merge Sort algorithm.
    * Time Complexity: O(n log n) in all cases
    * Space Complexity: O(n) for temporary arrays
    * Stability: Stable - preserves relative order of equal elements
@@ -85,7 +85,7 @@ public class RouteSorter {
 
     // Merge the temporary arrays back into routes[left..right]
     while (i < leftArray.size() && j < rightArray.size()) {
-      // Use <= to maintain stability (prefer left element when equal)
+      // Use <= to maintain stability (prefer a left element when equal)
       if (comparator.compare(leftArray.get(i), rightArray.get(j)) <= 0) {
         routes.set(k++, leftArray.get(i++));
       } else {

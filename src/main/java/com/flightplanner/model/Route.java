@@ -8,7 +8,7 @@ import java.util.List;
  * Includes a minimum 20-minute stopover time between connecting flights.
  */
 public class Route {
-  private final int id;
+  private int id;
   private final List<Integer> flightIds;
   private final int totalDuration; // in minutes, including stopover times
   private final double totalPrice;
@@ -56,6 +56,9 @@ public class Route {
     this.totalDuration = totalDuration;
     this.totalPrice = totalPrice;
     this.stopovers = stopovers;
+  }
+  public void setId(int id) {
+    this.id = id;
   }
 
   public int getId() {
